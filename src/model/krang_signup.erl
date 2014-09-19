@@ -1,0 +1,2 @@
+-module(krang_signup, [Id, Email, EmailVerifyToken, HashPwd]).
+-compile(export_all).

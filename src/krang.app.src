@@ -3,6 +3,6 @@
         {vsn, "0.0.1"},
         {modules, []},
         {registered, []},
-        {applications, [kernel, stdlib, crypto]},
+        {applications, [kernel, stdlib, crypto, public_key, asn1, inets, oauth]},
         {env, []}
     ]}.
