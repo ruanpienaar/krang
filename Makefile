@@ -11,6 +11,9 @@ compile:
 compile-app:
 	$(REBAR) boss c=compile
 
+clean:
+	$(REBAR) clean
+
 help:
 	@echo 'Makefile for your chicagoboss app                                      '
 	@echo '                                                                       '
