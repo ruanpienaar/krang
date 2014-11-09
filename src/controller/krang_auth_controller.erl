@@ -2,6 +2,9 @@
 -compile(export_all).
 
 index(_,_) ->
+    {redirect,"auth/action"}.
+
+action(_,_) ->
     {ok,[]}.
 
 login('POST',URI) ->
@@ -12,9 +15,9 @@ signup('POST',URI) ->
         [Email,Pwd,CPwd] when Email =:= undefined;
                               Pwd   =:= undefined;
                               CPwd  =:= undefined ->
-            {redirect,"auth"}; %% XXX Improve errors !!!
+            {redirect,"auth/action"}; %% XXX Improve errors !!!
         [Email,Pwd,CPwd] when Pwd =/= CPwd ->
-            {redirect,"auth"}; %% XXX Improve errors !!!
+            {redirect,"auth/action"}; %% XXX Improve errors !!!
         [Email,Pwd,CPwd] when Pwd =:= CPwd ->
             %% generate verify token
             VerifyToken = "test",
@@ -25,10 +28,11 @@ signup('POST',URI) ->
             S = krang_signup:new(id, Email, VerifyToken, HashPwd),
             case S:save() of 
                 {ok,SavedEntry} ->
-                    {redirect,"success"};
+                    {redirect,"auth/signup_success"};
                 Error ->
-                    {redirect,"auth"} %% XXX Improve errors !!!
+                    {redirect,"auth/action"} %% XXX Improve errors !!!
             end
     end.
 
-success()
+signup_success(_,_) ->
+    {ok,[{base_path,"../"}]}.
