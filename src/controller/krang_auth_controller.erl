@@ -2,7 +2,6 @@
 -compile(export_all).
 
 index(_,_) ->
-<<<<<<< HEAD
     {redirect,"auth/action"}.
 
 action(_,_) ->
@@ -41,10 +40,9 @@ signup('POST',URI) ->
             end
     end.
 
-<<<<<<< HEAD
+
 success() ->
     ok.
-=======
+
 signup_success(_,_) ->
     {ok,[{base_path,"../"}]}.
->>>>>>> 0c976ca86815dc8ad424ca26080c73f3539448aa
