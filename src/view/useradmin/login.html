@@ -1,0 +1,14 @@
+{% extends "useradmin/bare_base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="landing-template">
+        <form action="{% url action="login" %}" method="post">
+            <input type="text" name="un" id="un" />
+            <input type="password" name="pw" id="pw" />
+            <input type="submit" value="go" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

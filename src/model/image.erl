@@ -1,0 +1,2 @@
+-module(image, [Id,Name]).
+-compile(export_all).

@@ -1,0 +1,16 @@
+{% extends "landing/base.html" %}
+{% block content %}
+
+    <div class="container">
+        <div class="landing-template">
+            
+            {% for i in images %}
+                <img src='/static/img/{{i.name}}' />
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

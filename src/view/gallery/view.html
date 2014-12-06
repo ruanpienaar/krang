@@ -1,0 +1,11 @@
+{% extends "gallery/base.html" %}
+{% block content %}
+    <br/>
+    <a href="{% url action="upload" %}/{{gallery_name}}">Upload</a>
+    <p>Viewing gallery {{gallery_name}}</p>
+    {% if gallery_images %}
+        {% for i in gallery_images %}
+            <img alt="{{i.name}}" src="{% url action="uploads" %}/{{i.name}}" width="50px" />
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+<html>
+<head>
+ <title>{% block title %}Greetings!{% endblock %}</title>
+</head>
+<body>
+    {% block body %}
+        <ul>
+        {% if items %}
+            {% for i in items %}
+                <li>{{ i.text }}
+            {% endfor %}
+        {% else %}
+            <li>No items!
+        {% endif %}
+        </ul>
+    {% endblock %}
+    <p><a href="{% url action="create" %}">New greeting...</a></p>
+    <form method="post" action="{% url action="goodbye" %}">
+        Delete:
+        <select name="del_id">
+        {% for i in items %}
+            <option value="{{ i.id }}">{{ i.text }}
+        {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+message queue                    
+
+
+                / publish       ( push )
+channel <-> ----
+                \ subscribe     ( pull [possible blocking], poll [non blocking] ) 

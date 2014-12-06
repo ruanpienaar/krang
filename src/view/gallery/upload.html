@@ -1,0 +1,8 @@
+{% extends "gallery/base.html" %}
+{% block content %}
+    <form action="upload/{{gallery_name}}" method="post" enctype="multipart/form-data">
+        <label for="file">Image:</label>
+        <input type="file" name="image" id="image"><br>
+        <input type="submit" name="submit" value="Upload">
+    </form>
+{% endblock %}

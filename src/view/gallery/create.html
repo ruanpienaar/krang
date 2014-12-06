@@ -1,0 +1,12 @@
+{% extends "gallery/base.html" %}
+
+{# This is how you overwrite the base block #}
+{# {% block title %}My amazing blog{% endblock %} #}
+
+{% block content %}
+    <p>Create</p>
+    <form method="post">
+        <input type="text" name="name" />
+        <input type="submit">
+    </form>
+{% endblock %}

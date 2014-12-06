@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BASE</title>
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="static/landing_template.css">
+</head>
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <span>~</span>
+        <a href="{% url action="login" %}">Login</a>
+        <span>~</span>
+        <a href="{% url action="" %}">Index</a>
+        <span>~</span>
+        <a href="{% url action="users" %}">Users</a>
+        <span>~</span>
+        <a href="{% url action="settings" %}">Settings</a>
+        <span>~</span>
+        <a href="{% url action="status" %}">Status</a>
+        <span>~</span>
+        <a href="{% url action="logout" %}">Logout</a>
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

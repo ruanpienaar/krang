@@ -1,0 +1,14 @@
+{% extends "gallery/base.html" %}
+{% block content %}
+    <ul>
+    {% if galleries %}
+        {% for g in galleries %}
+            <li>
+                <a href="{% url action="view" %}/{{g.name}}">{{g.name}}</a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>No galleries</p>
+    {% endif %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,51 @@
+<!-- <a href="{% url action="admin" %}">Admin</a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BASE</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../static/landing_template.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ЯP</a>
+            </div>
+            <div class="collpase navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="">Home</a></li>
+                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <div id="sidebar">
+        {% block sidebar %}
+        <a href="{% url action="list" %}">List</a>
+        <span>~</span>
+        <a href="{% url action="create" %}">Create</a>
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+
+    <script src="../static/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
