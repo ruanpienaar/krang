@@ -2,9 +2,10 @@
 -compile(export_all).
 
 index(_,_) ->
-    {redirect,"auth/action"}.
+    {redirect,"action"}.
 
 action(_,_) ->
+    %% Check if logged in...
     {ok,[{"title","auth"}]}.
 
 login('POST',URI) ->
@@ -17,12 +18,12 @@ signup('POST',URI) ->
                               Pwd   =:= undefined;
                               CPwd  =:= undefined ->
             krang_common:log("All Input fields empty!"),
-            {redirect,"auth"}; %% XXX Improve errors !!!
+            {redirect,"action"};
         [Email,Pwd,CPwd] when Pwd =/= CPwd ->
             krang_common:log("Password Confirmation doesn't match!"),
-            {redirect,"auth"}; %% XXX Improve errors !!!
+            {redirect,"action"};
         [Email,Pwd,CPwd] when Pwd =/= CPwd ->
-            {redirect,"auth/action"}; %% XXX Improve errors !!!
+            {redirect,"action"};
         [Email,Pwd,CPwd] when Pwd =:= CPwd ->
             krang_common:log("Everything good!"),
             %% generate verify token
@@ -34,9 +35,11 @@ signup('POST',URI) ->
             S = krang_signup:new(id, Email, VerifyToken, HashPwd),
             case S:save() of
                 {ok,SavedEntry} ->
-                    {redirect,"auth/signup_success"};
+                    krang_common:log("DB Rec saved"),
+                    {redirect,"signup_success"};
                 Error ->
-                    {redirect,"auth/action"} %% XXX Improve errors !!!
+                    krang_common:log("DB Rec not saved"),
+                    {redirect,"action"}
             end
     end.
 
@@ -45,4 +48,4 @@ success() ->
     ok.
 
 signup_success(_,_) ->
-    {ok,[{base_path,"../"}]}.
+    {ok, []}.

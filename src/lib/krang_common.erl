@@ -1,5 +1,6 @@
 -module(krang_common).
 -compile(export_all).
+-include("../include/krang_logger.hrl").
 
 log(Msg) ->
-    io:format("~p\n",[Msg]).
+    ?INFO(Msg,[]).
