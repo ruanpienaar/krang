@@ -1,2 +1,0 @@
--module(user, [Id,Name,Passwd]).
--compile(export_all).

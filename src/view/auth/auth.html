@@ -1,32 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-
     <div class="container">
+
       <form class="form-signin" role="form" action="login" method="post">
-        <h2 class="form-signin-heading">Sign In</h2>
+        <h2 class="form-signin-heading">Please sign in</h2>
+
         <input name="em" id="em" type="email"    class="form-control" placeholder="Email address" required autofocus>
         <input name="pw" id="pw" type="password" class="form-control" placeholder="Password"      required>
-        <label class="checkbox text-center">
+
+        <label class="checkbox">
           <input type="checkbox" value="remember-me">Remember me
         </label>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+
     </div> <!-- /container -->
 
     <div class="container">
-        <p>
-            <h1 class="text-center">Or ...</h1>
-        </p>
+        <h1 class="auth_h1">OR</h1>
     </div>
 
     <div class="container">
-        <form class="form-signup center-block" role="form" action="signup" method="post">
-            <h2 class="form-signin-heading">Sign Up</h2>
-            <input name="r_em"  id="r_em"  type="email"    class="form-control" placeholder="Email address"    required>
-            <input name="r_pw"  id="r_pw"  type="password" class="pwd form-control" placeholder="Password"         required>
-            <input name="r_cpw" id="r_cpw" type="password" class="conf_pwd form-control" placeholder="Confirm Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <form class="form-signin" role="form" action="signup" method="post">
+            <h2 class="form-signin-heading">Please sign up</h2>
 
+            <input name="r_em"  id="r_em"  type="email"    class="form-control" placeholder="Email address"    required>
+            <input name="r_pw"  id="r_pw"  type="password" class="form-control" placeholder="Password"         required>
+            <input name="r_cpw" id="r_cpw" type="password" class="form-control" placeholder="Confirm Password" required>
+
+            <label class="checkbox">
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         </form>
     </div>
 

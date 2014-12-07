@@ -1,0 +1,2 @@
+-module(krang_user, [Id,Email,Passwd,Verified]).
+-compile(export_all).

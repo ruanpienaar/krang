@@ -1,2 +1,3 @@
--module(krang_signup, [Id, Email, EmailVerifyToken, HashPwd]).
+-module(krang_signup, [Id, VerifyToken, Email]).
 -compile(export_all).
+%% TODO: Add expires...
