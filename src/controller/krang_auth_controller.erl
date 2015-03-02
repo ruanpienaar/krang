@@ -1,5 +1,5 @@
 -module(krang_auth_controller, [Req]).
-%% TODO: only export function's that will be exposed as URL's. 
+%% TODO: only export function's that will be exposed as URL's.
 %% So that you can abstract simmilar pieces of code into smaller functions.
 
 %% TODO: make all the redirection abs paths
@@ -7,8 +7,7 @@
 
 action(_,_) ->
     %% Check if logged in...
-
-    case Req:cookie("_boss_session") of 
+    case Req:cookie("_boss_session") of
         undefined ->
             {ok,[]};
         Cookie ->
@@ -28,31 +27,33 @@ login('POST',URI) ->
             {redirect,krang_common:site_base_url()++"/auth/action"};
         [{krang_user,Id,Email,Passwod,true}] ->
             % BackendCookie = krang_common:md5_hash(Email),
-            Cookie = boss_session:new_session("_boss_session"),
-            io:format("Cookie: ~p\n",[Cookie]),
-            ok = boss_session:set_session_data(Cookie,email,Email),
+            %%Cookie = boss_session:new_session("_boss_session"),
+            %%io:format("Cookie: ~p\n",[Cookie]),
+            %%ok = boss_session:set_session_data(Cookie,email,Email),
             {redirect,"auth_status"}
     end.
 
 logoff('GET',_) ->
-    case Req:cookie("_boss_session") of 
-        undefined ->
-            {redirect,krang_common:site_base_url()++"/auth/action"};
-        Cookie ->
-            io:format("Cookie : ~p\n",[Cookie]),
-            ok = boss_session:delete_session(Cookie),
-            {output,<<"mmm">>}
-    end.
+    % case Req:cookie("_boss_session") of
+    %     undefined ->
+    %         {redirect,krang_common:site_base_url()++"/auth/action"};
+    %     Cookie ->
+    %         io:format("Cookie : ~p\n",[Cookie]),
+    %         ok = boss_session:delete_session(Cookie),
+    %         {output,<<"mmm">>}
+    % end.
+    ok.
 
 auth_status('GET',_) ->
-    case Req:cookie("_boss_session") of 
-        undefined ->
-            {redirect,krang_common:site_base_url()++"/auth/action"};
-        Cookie ->
-            io:format("Cookie ! ~p\n",[Cookie]),
-            io:format("Email  ! ~p\n",[boss_session:get_session_data(Cookie,email)]),
-            {output,<<"mmm">>}
-    end.
+    % case Req:cookie("_boss_session") of
+    %     undefined ->
+    %         {redirect,krang_common:site_base_url()++"/auth/action"};
+    %     Cookie ->
+    %         io:format("Cookie ! ~p\n",[Cookie]),
+    %         io:format("Email  ! ~p\n",[boss_session:get_session_data(Cookie,email)]),
+    %         {output,<<"mmm">>}
+    % end.
+    ok.
 
 signup('POST',URI) ->
     case lists:map(fun(PostParam) -> Req:post_param(PostParam) end,
@@ -70,7 +71,7 @@ signup('POST',URI) ->
                 krang_common:rand_hash_32(),
             ConfirmationUrl =
                 krang_common:site_base_url()++"/auth/confirm_email"
-                ++ "?vt="++VerifyToken 
+                ++ "?vt="++VerifyToken
                 ++ "&em="++Email,
             %% Create email
             %% Send email here
@@ -85,6 +86,7 @@ signup('POST',URI) ->
                             krang_common:log("User ~p created...",[Email]),
                             {redirect,"signup_success"};
                         Error ->
+                            krang_common:log("Signup POST error ~p",[Error]),
                             {redirect,"action?error=user_creation_failed"}
                     end;
                 Error ->
@@ -100,18 +102,17 @@ signup_success(_,_) ->
 confirm_email('GET',[]) ->
     VerifyToken = Req:query_param("vt"),
     Email       = Req:query_param("em"),
-    io:format("VerifyToken : ~p\n",[VerifyToken]),
     case boss_db:find(krang_signup,[{'conf_hash','equals',VerifyToken},
-                                    {'email','equals',Email}]) of 
+                                    {'email','equals',Email}]) of
         [] ->
             {redirect,krang_common:site_base_url()++"/auth/action"};
         [{krang_signup,Id, ConfHash, Email}] ->
-            case boss_db:find(krang_user,[{'email','equals',Email}]) of 
+            case boss_db:find(krang_user,[{'email','equals',Email}]) of
                 [] ->
                     {redirect,krang_common:site_base_url()++"/auth/action"};
                 [{krang_user,UserId,Email,Passwd,false}] ->
                     ok = boss_db:delete(Id),
-                    {ok,_SavedRec} 
+                    {ok,_SavedRec}
                         = boss_db:save_record(
                             {krang_user,UserId,Email,Passwd,true}),
                     {ok,[]}
