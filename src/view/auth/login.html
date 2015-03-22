@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container">
+      <form class="form-signin" role="form" action="login" method="post">
+        <h2 class="form-signin-heading">Sign In</h2>
+        <input name="em" id="em" type="email"    class="form-control" placeholder="Email address" required autofocus>
+        <input name="pw" id="pw" type="password" class="form-control" placeholder="Password"      required>
+        <label class="checkbox text-center">
+          <input type="checkbox" value="remember-me">Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div> <!-- /container -->
+
+{% endblock %}
